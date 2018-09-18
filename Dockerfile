@@ -59,7 +59,7 @@ RUN set -ex; \
 RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 # Download the sonar scanner for msbuild
-RUN export PATH="$PATH:/root/.dotnet/tools"
+ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
 
 WORKDIR $DOTNET_BUILD_DIR
