@@ -1,8 +1,5 @@
 FROM microsoft/dotnet:2.1-sdk
 
-# Install Mono
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-
 # set up environment
 ENV DOTNET_BUILD_DIR=/build_dir
 	
