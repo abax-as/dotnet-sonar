@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1-sdk
+FROM microsoft/dotnet:2.2-sdk
 
 # set up environment
 ENV DOTNET_BUILD_DIR=/build_dir
@@ -55,8 +55,11 @@ RUN set -ex; \
 # see CA_CERTIFICATES_JAVA_VERSION notes above
 RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-# Download the sonar scanner for msbuild
+# Install Sonar Scanner for .NET Core
 ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet tool install --global dotnet-sonarscanner
+RUN dotnet tool install -g dotnet-sonarscanner
+
+# Install trx -> JUnit parser
+RUN dotnet tool install -g trx2junit
 
 WORKDIR $DOTNET_BUILD_DIR
