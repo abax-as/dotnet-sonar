@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2
 
 # set up environment
 ENV DOTNET_BUILD_DIR=/build_dir
@@ -41,7 +41,8 @@ RUN set -ex; \
 	apt-get install -t \
 		stretch-backports \
 		openjdk-8-jre-headless \
-		ca-certificates-java -y; \
+		ca-certificates-java \
+		-y; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 # verify that "docker-java-home" returns what we expect
@@ -61,5 +62,13 @@ RUN dotnet tool install -g dotnet-sonarscanner
 
 # Install trx -> JUnit parser
 RUN dotnet tool install -g trx2junit
+
+# Install minver
+RUN dotnet tool install -g minver-cli
+
+# Install Docker Compose
+RUN curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; \
+	chmod +x /usr/local/bin/docker-compose; \
+	docker-compose --version
 
 WORKDIR $DOTNET_BUILD_DIR
