@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.100-alpine3.10
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.102-alpine3.10
 
 # set up environment
 ENV DOTNET_BUILD_DIR=/build_dir
